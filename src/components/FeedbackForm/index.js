@@ -1,1 +1,1 @@
-export {};
+export { FeedbackForm } from './FeedbackForm';
