@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 // import FeedbackForm from 'components/FeedbackForm';
 import Statistics from 'components/Statistics';
-import FeedbackOptions from './FeedbackOptions';
-import Section from 'Section';
+import FeedbackOptions from 'components/FeedbackOptions';
+import Section from 'components/Section';
+import Notification from 'components/Notification';
 
 class App extends Component {
   state = {
@@ -12,21 +13,11 @@ class App extends Component {
     bad: 0,
   };
 
-  feedbackGoodHandler = e => {
-    this.setState(({ good }) => {
-      return { good: good + 1 };
-    });
-  };
+  feedbackHandler = e => {
+    const mark = e.currentTarget.name;
 
-  feedbackNeutralHandler = e => {
-    this.setState(({ neutral }) => {
-      return { neutral: neutral + 1 };
-    });
-  };
-
-  feedbackBadHandler = e => {
-    this.setState(({ bad }) => {
-      return { bad: bad + 1 };
+    this.setState(ps => {
+      return { ...ps, [mark]: ps[mark] + 1 };
     });
   };
 
@@ -38,33 +29,38 @@ class App extends Component {
 
   render() {
     const { good, bad, neutral } = this.state;
+    const total = this.countTotalFeedback();
 
     return (
       <Wrapper>
         <Section title="Please leave feedback">
-          <FeedbackOptions onLeaveFeedback={this.feedbackGoodHandler} />{' '}
+          <FeedbackOptions onLeaveFeedback={this.feedbackHandler} />
         </Section>
 
-        <Section title="Statistics">
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={1}
-            positivePercentage={1}
-          />
-        </Section>
+        {total === 0 ? (
+          <Notification message="There is no feedback"></Notification>
+        ) : (
+          <Section title="Statistics">
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          </Section>
+        )}
       </Wrapper>
     );
   }
 }
 
 const Wrapper = styled.div`
-  height: 100vh;
-  display: flex;
+  /* height: 100vh; */
+  /* display: flex; */
   justify-content: center;
   align-items: center;
-  font-size: 40;
+  font-size: 30px;
   color: #010101;
 `;
 
