@@ -33,14 +33,16 @@ class FeedbackForm extends Component {
     });
   };
 
-  countTotalFeedback = allFeedback => {
-    return;
-  };
+  countTotalFeedback = () =>
+    this.state.good + this.state.neutral + this.state.bad;
+
+  countPositiveFeedbackPercentage = () =>
+    Math.ceil((this.state.good / this.countTotalFeedback()) * 100);
 
   render() {
     const { good, neutral, bad } = this.state;
-    const total = good + bad + neutral;
-    const goodPercent = Math.ceil((good / total) * 100);
+    const total = this.countTotalFeedback();
+    // const goodPercent = Math.ceil((good / total) * 100);
 
     return (
       <div>
@@ -77,7 +79,7 @@ class FeedbackForm extends Component {
           </ItemCounter>
           <ItemCounter>
             <p>Positive feedback :</p>
-            <span>{total > 0 && goodPercent} %</span>
+            <span>{total > 0 && this.countPositiveFeedbackPercentage()} %</span>
           </ItemCounter>
         </ul>
       </div>
