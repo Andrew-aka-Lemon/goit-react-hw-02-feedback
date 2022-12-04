@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-const ButtonThumb = styled.div`
-  display: flex;
-  gap: 10px;
-`;
-
 const ItemCounter = styled.li`
   display: flex;
   align-items: center;
@@ -12,4 +7,4 @@ const ItemCounter = styled.li`
   margin: 5px 0;
 `;
 
-export { ItemCounter, ButtonThumb };
+export { ItemCounter };
