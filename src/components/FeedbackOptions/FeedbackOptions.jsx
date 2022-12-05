@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const FeedbackOptions = ({ onLeaveFeedback }) => {
   return (
@@ -14,6 +15,10 @@ const FeedbackOptions = ({ onLeaveFeedback }) => {
       </button>
     </ButtonThumb>
   );
+};
+
+FeedbackOptions.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };
 
 const ButtonThumb = styled.div`
