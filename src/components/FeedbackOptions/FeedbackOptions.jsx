@@ -18,7 +18,7 @@ const FeedbackOptions = ({ onLeaveFeedback }) => {
 };
 
 FeedbackOptions.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
 };
 
 const ButtonThumb = styled.div`
